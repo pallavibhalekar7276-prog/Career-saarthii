@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Recommendation - Career Saarthi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Career Saarthi</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="career-section">
+        <h2>Your Recommended Career: <span id="careerName"></span></h2>
+        <div id="roadmap"></div>
+        <a href="quiz.html" class="btn">Retake Quiz</a>
+    </section>
+
+    <script>
+        const career = localStorage.getItem('career');
+        document.getElementById('careerName').textContent = career;
+
+        const roadmap = document.getElementById('roadmap');
+        const details = {
+            "Software": "1. Learn programming languages (Python, JavaScript)<br>2. Build projects<br>3. Apply for internships<br>4. Start as a Junior Developer<br>5. Grow to Senior Developer/Engineer",
+            "Doctor": "1. Complete MBBS<br>2. Internship<br>3. Postgraduate specialization<br>4. Residency/Practice<br>5. Hospital/Private Practice",
+            "Teacher": "1. Complete Graduation<br>2. B.Ed/Teaching Certificate<br>3. Apply to schools/colleges<br>4. Gain teaching experience<br>5. Grow to Senior Teacher/Professor",
+            "Accountant": "1. Complete B.Com<br>2. Learn Accounting software<br>3. CA/CPA course<br>4. Work in finance firm<br>5. Senior Accountant/Manager",
+            "Dance": "1. Join dance academy<br>2. Learn multiple styles<br>3. Perform regularly<br>4. Teach others<br>5. Become professional dancer/choreographer"
+        };
+
+        roadmap.innerHTML = details[career] || "Explore your interests and create your own career path!";
+    </script>
+</body>
+</html>

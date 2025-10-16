@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Saarthi - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    /* Global */
+    * { box-sizing: border-box; margin:0; padding:0; font-family:'Poppins', sans-serif; }
+    body { background:#f0f4f8; }
+
+    /* Header */
+    header {
+        background: #1E90FF;
+        color: white;
+        padding: 15px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    header h1 { font-size: 24px; font-weight: 600; }
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(to right, #1E90FF, #00BFFF);
+        color: white;
+        padding: 120px 40px 80px;
+        text-align: center;
+    }
+    .hero h2 { font-size: 42px; margin-bottom: 20px; }
+    .hero p { font-size: 18px; margin-bottom: 30px; }
+    .hero .btn {
+        background: white;
+        color: #1E90FF;
+        padding: 15px 30px;
+        margin: 0 10px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .hero .btn:hover { background: #f1f1f1; }
+
+    /* Features Section */
+    .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 60px 20px;
+        gap: 30px;
+    }
+    .feature-card {
+        background: white;
+        border-radius: 20px;
+        width: 250px;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow:0 15px 40px rgba(0,0,0,0.2);}
+    .feature-card h3 { color: #1E90FF; margin-bottom: 15px; }
+    .feature-card p { color: #555; font-size: 15px; }
+
+    /* Footer */
+    footer {
+        background: #1E90FF;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px;
+        font-size: 14px;
+    }
+
+    @media screen and (max-width:768px){
+        .features { flex-direction: column; align-items: center; }
+        .hero h2 { font-size: 32px; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <h1>Career Saarthi</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h2>Discover Your Ideal Career Path</h2>
+    <p>Take our career quiz and receive personalized guidance to reach your goals.</p>
+    <a href="register.html" class="btn">Get Started</a>
+    <a href="quiz.html" class="btn">Take Quiz</a>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="feature-card">
+        <h3>Personalized Quiz</h3>
+        <p>Answer 5 simple questions to discover your best career options.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Career Guidance</h3>
+        <p>Receive step-by-step roadmap and guidance for your chosen career.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Expert Advice</h3>
+        <p>Learn about different careers and make informed choices for your future.</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Career Saarthi. All Rights Reserved.
+</footer>
+
+</body>
+</html>

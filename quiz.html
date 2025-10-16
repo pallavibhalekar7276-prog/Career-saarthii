@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz - Career Saarthi</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #1E90FF, #00BFFF);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quiz-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px 30px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        text-align: center;
+        position: relative;
+    }
+
+    .quiz-card h2 {
+        color: #1E90FF;
+        margin-bottom: 20px;
+    }
+
+    .quiz-card .question {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .quiz-card .options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .quiz-card .option {
+        background: #f1f1f1;
+        padding: 12px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        border: 2px solid transparent;
+        text-align: left;
+    }
+
+    .quiz-card .option:hover {
+        background: #e0f0ff;
+        border-color: #1E90FF;
+    }
+
+    .quiz-card .option.selected {
+        background: #1E90FF;
+        color: white;
+        border-color: #1E90FF;
+    }
+
+    .quiz-card .btn {
+        margin-top: 25px;
+        padding: 12px 20px;
+        font-size: 16px;
+        background: #1E90FF;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .quiz-card .btn:hover {
+        background: #00BFFF;
+    }
+
+    .progress {
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: #555;
+    }
+</style>
+</head>
+<body>
+
+<div class="quiz-card">
+    <h2>Career Quiz</h2>
+    <div class="progress" id="progressText">Question 1 of 5</div>
+    <div class="question" id="questionText">Question text will appear here</div>
+    <div class="options" id="optionsContainer">
+        <!-- Options will be generated here -->
+    </div>
+    <button class="btn" id="nextBtn">Next</button>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "Which subject do you enjoy the most?",
+            options: ["Mathematics", "Biology", "Arts", "Commerce", "Dance/Performing Arts"]
+        },
+        {
+            question: "Which activity do you prefer?",
+            options: ["Coding/Tech Projects", "Medical Volunteering", "Teaching/Tutoring", "Managing Accounts", "Performing/Dancing"]
+        },
+        {
+            question: "What describes your personality?",
+            options: ["Logical & Analytical", "Compassionate & Caring", "Patient & Understanding", "Organized & Detail-Oriented", "Creative & Expressive"]
+        },
+        {
+            question: "What is your ideal work environment?",
+            options: ["Office / Tech Hub", "Hospital / Clinic", "School / Classroom", "Corporate / Finance Office", "Stage / Studio"]
+        },
+        {
+            question: "Which goal appeals to you the most?",
+            options: ["Develop software", "Save lives", "Educate others", "Manage finances", "Perform on stage"]
+        }
+    ];
+
+    let currentQuestion = 0;
+    let answers = [];
+
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressText = document.getElementById('progressText');
+
+    function loadQuestion(){
+        // Clear previous options
+        optionsContainer.innerHTML = '';
+        questionText.textContent = questions[currentQuestion].question;
+        progressText.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+
+        // Create options
+        questions[currentQuestion].options.forEach(option => {
+            const div = document.createElement('div');
+            div.classList.add('option');
+            div.textContent = option;
+            div.addEventListener('click', () => selectOption(div));
+            optionsContainer.appendChild(div);
+        });
+    }
+
+    function selectOption(selectedDiv){
+        // Remove previous selection
+        const allOptions = document.querySelectorAll('.option');
+        allOptions.forEach(option => option.classList.remove('selected'));
+        selectedDiv.classList.add('selected');
+        answers[currentQuestion] = selectedDiv.textContent;
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if(!answers[currentQuestion]){
+            alert("Please select an option!");
+            return;
+        }
+        currentQuestion++;
+        if(currentQuestion < questions.length){
+            loadQuestion();
+        } else {
+            // Save answers and redirect to result page
+            localStorage.setItem('quizAnswers', JSON.stringify(answers));
+            window.location.href = 'result.html';
+        }
+    });
+
+    loadQuestion();
+</script>
+
+</body>
+</html>

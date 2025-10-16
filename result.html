@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Result - Career Saarthi</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #1E90FF, #00BFFF);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .result-card {
+        background: white;
+        border-radius: 20px;
+        padding: 50px 30px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        text-align: center;
+        position: relative;
+    }
+
+    .result-card h1 {
+        font-size: 28px;
+        color: #1E90FF;
+        margin-bottom: 20px;
+    }
+
+    .career {
+        background: #f1f1f1;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        font-size: 18px;
+        color: #333;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+        margin-top: 20px;
+        padding: 12px 25px;
+        font-size: 16px;
+        background: #1E90FF;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn:hover {
+        background: #00BFFF;
+    }
+
+    .profile-icon {
+        width: 100px;
+        height: 100px;
+        background: #1E90FF;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        margin: 0 auto 20px auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+</style>
+</head>
+<body>
+
+<div class="result-card">
+    <div class="profile-icon" id="profileInitial">U</div>
+    <h1 id="welcomeText">Congratulations, User!</h1>
+    <div id="careerContainer">
+        <!-- Recommended careers will appear here -->
+    </div>
+    <a href="roadmap.html" class="btn">View Roadmap</a>
+    <a href="quiz.html" class="btn" style="background:#28a745; margin-left:10px;">Retake Quiz</a>
+</div>
+
+<script>
+    // Get user and quiz answers
+    const user = JSON.parse(localStorage.getItem('user'));
+    const answers = JSON.parse(localStorage.getItem('quizAnswers'));
+
+    if(!user || !answers){
+        window.location.href = 'login.html';
+    }
+
+    document.getElementById('welcomeText').textContent = `Congratulations, ${user.name}!`;
+    document.getElementById('profileInitial').textContent = user.name.charAt(0).toUpperCase();
+
+    // Simple mapping of answers to career options (example)
+    const careerMap = {
+        "Mathematics": "Software Engineer",
+        "Biology": "Doctor",
+        "Arts": "Teacher",
+        "Commerce": "Accountant",
+        "Dance/Performing Arts": "Dancer",
+        "Coding/Tech Projects": "Software Engineer",
+        "Medical Volunteering": "Doctor",
+        "Teaching/Tutoring": "Teacher",
+        "Managing Accounts": "Accountant",
+        "Performing/Dancing": "Dancer",
+        "Logical & Analytical": "Software Engineer",
+        "Compassionate & Caring": "Doctor",
+        "Patient & Understanding": "Teacher",
+        "Organized & Detail-Oriented": "Accountant",
+        "Creative & Expressive": "Dancer",
+        "Office / Tech Hub": "Software Engineer",
+        "Hospital / Clinic": "Doctor",
+        "School / Classroom": "Teacher",
+        "Corporate / Finance Office": "Accountant",
+        "Stage / Studio": "Dancer",
+        "Develop software": "Software Engineer",
+        "Save lives": "Doctor",
+        "Educate others": "Teacher",
+        "Manage finances": "Accountant",
+        "Perform on stage": "Dancer"
+    };
+
+    // Calculate recommended careers
+    let careerCount = {};
+    answers.forEach(ans => {
+        const career = careerMap[ans];
+        if(career){
+            careerCount[career] = (careerCount[career] || 0) + 1;
+        }
+    });
+
+    // Sort careers by score
+    const sortedCareers = Object.keys(careerCount).sort((a,b)=> careerCount[b]-careerCount[a]);
+
+    const careerContainer = document.getElementById('careerContainer');
+    sortedCareers.forEach(career => {
+        const div = document.createElement('div');
+        div.classList.add('career');
+        div.textContent = career;
+        careerContainer.appendChild(div);
+    });
+
+</script>
+
+</body>
+</html>
